@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jkworld.dao.UserMapper" >
+
+    <select id="selectUserByName" resultType="jkworld.pojo.User" parameterType="java.lang.String">
+        select * from user where username =#{username};
+    </select>
+
+
+    <select id="selectUserPermissionByName" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select user.type from user where user.username =#{username};
+    </select>
+
+    <select id="getUserCount" resultType="java.lang.Integer" >
+        select count(*) from user
+     </select>
+
+    <!-- 修改用户积分 -->
+    <update id="addUserCredit" parameterType="java.lang.Integer" >
+        UPDATE `user` SET `user`.credit =`user`.credit+1 WHERE `user`.id =#{id};
+    </update>
+    
+    
+    <select id="selectByPrimaryKey" resultType="jkworld.pojo.User" parameterType="java.lang.Integer">
+        select * from user where id =#{id};
+    </select>
+
+    <update id="updateUserById" >
+        <if test="avatar == ''" >
+            UPDATE `user` SET `user`.email =#{email},`user`.phone_num =#{phone_num} WHERE `user`.id =#{id};
+        </if>
+        <if test="avatar != ''" >
+            UPDATE `user` SET `user`.email =#{email},`user`.phone_num =#{phone_num},`user`.avatar =#{avatar} WHERE `user`.id =#{id};
+        </if>
+    </update>
+
+
+    <insert id="insert" parameterType="jkworld.pojo.User" >
+    insert into user (id, username, password,
+      email, phone_num, create_time,
+      update_time, credit, avatar,
+      type)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{credit,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR},
+      #{type,jdbcType=TINYINT})
+  </insert>
+</mapper>

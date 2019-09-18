@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jkworld.dao.TopicMapper" >
+
+
+    <!-- 主题和用户信息结果集 用于首页显示  -->
+    <resultMap id="topicAndUserInfo" type="jkworld.pojo.Topic" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="click" property="click" jdbcType="INTEGER" />
+        <result column="tab_id" property="tabId" jdbcType="TINYINT" />
+        <result column="count_replies" property="countReplies" jdbcType="INTEGER" />
+        <association property="user" javaType="jkworld.pojo.User">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="username" property="username" jdbcType="VARCHAR" />
+            <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+            <result column="credit" property="credit" jdbcType="INTEGER" />
+        </association>
+        <association property="tab" javaType="jkworld.pojo.Tab">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="tab_name" property="tabName" jdbcType="VARCHAR" />
+        </association>
+    </resultMap>
+
+    <!--定义一个存储连接查询的Topic-->
+    <resultMap id="topicAndUser" type="jkworld.pojo.Topic">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="click" property="click" jdbcType="INTEGER" />
+        <result column="tab_id" property="tabId" jdbcType="TINYINT" />
+        <result column="count_replies" property="countReplies" jdbcType="INTEGER" />
+        <!--  one to one      -->
+        <association property="user" javaType="jkworld.pojo.User">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="username" property="username" jdbcType="VARCHAR" />
+            <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+            <result column="credit" property="credit" jdbcType="INTEGER" />
+        </association>
+        <!-- one to one       -->
+        <association property="tab" javaType="jkworld.pojo.Tab">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="tab_name" property="tabName" jdbcType="VARCHAR" />
+        </association>
+    </resultMap>
+
+    <!-- 显示用户头像啥啥啥的  -->
+    <resultMap id="topicAndUserDetail" type="jkworld.pojo.Topic">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="click" property="click" jdbcType="INTEGER" />
+        <result column="tab_id" property="tabId" jdbcType="TINYINT" />
+        <association property="user" javaType="jkworld.pojo.User">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="username" property="username" jdbcType="VARCHAR" />
+            <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+            <result column="credit" property="credit" jdbcType="INTEGER" />
+        </association>
+    </resultMap>
+
+    <!-- 返回话题与用户的多个实体类 -->
+    <select id="listTopicsAndUsers" resultMap="topicAndUser" >
+        select topic.id,topic.user_id,topic.create_time,topic.update_time,topic.title,topic.click,topic.tab_id,user.username,user.avatar ,
+        tab.tab_name,count(reply.id) as count_replies from topic LEFT JOIN user on  topic.user_id = user.id
+        LEFT JOIN tab on tab.id=topic.tab_id LEFT JOIN reply on topic.id=reply.topic_id
+        group by topic.id order by topic.id desc ;
+    </select>
+
+    <select id="selectTopicById" parameterType="java.lang.Integer" resultMap="topicAndUserDetail">
+      SELECT topic.*,user.username,user.avatar,user.credit from topic,user where topic.user_id = user.id and topic.id = #{id,jdbcType=INTEGER};
+    </select>
+
+    <!-- 最多评论主题列表 -->
+    <resultMap id="mostCommentsTopic" type="jkworld.pojo.Topic">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="count_replies" property="countReplies" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- -->
+    <select id="listMostCommentsTopics" resultMap="mostCommentsTopic">
+        SELECT topic.id,topic.title,count(reply.id) as count_replies  from topic ,reply  where topic.id = reply.topic_id group by topic.id order by count_replies desc limit 5;
+    </select>
+
+
+    <!-- 点击量+1 -->
+    <update id="clickAddOne" parameterType="java.lang.Integer" >
+    update topic
+    set
+    click = click+1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <!-- 统计用户数  -->
+    <select id="getTopicsNum" resultType="java.lang.Integer" >
+        select
+        COUNT(*)
+        from topic
+    </select>
+
+    <!-- 返回的主键自增 -->
+    <insert id="insertTopicReturnId" parameterType="jkworld.pojo.Topic">
+        <!--
+            order相对于 insert 的操作前还是后
+            LAST_INSERT_ID()   是mysql中函数
+        -->
+        <selectKey order="AFTER" keyProperty="id" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into topic(user_id,create_time,update_time,title,content,click,tab_id) values(#{userId},#{createTime},#{updateTime},#{title},#{content},#{click},#{tabId})
+    </insert>
+
+    <select id="listTopicsAndUsersOfTab" parameterType="java.lang.Integer" resultMap="topicAndUserInfo" >
+       select topic.id,topic.user_id,topic.create_time,topic.update_time,topic.title,topic.click,topic.tab_id,user.username,user.avatar ,
+        tab.tab_name,count(reply.id) as count_replies from topic LEFT JOIN user on  topic.user_id = user.id
+        LEFT JOIN tab on tab.id=topic.tab_id  LEFT JOIN reply on topic.id=reply.topic_id where tab.id = #{id,jdbcType=INTEGER}
+        group by topic.id order by topic.id desc ;
+  </select>
+
+
+    <!-- 查找用户发过的帖子 -->
+    <select id="selectUserTopic" parameterType="java.lang.Integer" resultMap="topicAndUserInfo">
+
+  	select topic.id,topic.user_id,topic.create_time,topic.update_time,topic.title,topic.click,topic.tab_id,user.username,user.avatar ,
+	tab.tab_name from topic LEFT JOIN user on topic.user_id = user.id LEFT JOIN tab on tab.id=topic.tab_id
+	where topic.user_id  = #{id,jdbcType=INTEGER}
+
+  </select>
+</mapper>
