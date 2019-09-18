@@ -38,7 +38,7 @@ public class VerificationServiceImp implements VerificationService {
 		String host = "https://chanyoo.market.alicloudapi.com";
         String path = "/sendsms";
         String method = "GET";
-        String appcode = "7c738b8f7c71479b8f1209fa6a1906a7";
+        String appcode = "your appcode";
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Authorization", "APPCODE " + appcode);
         Map<String, String> querys = new HashMap<String, String>();
