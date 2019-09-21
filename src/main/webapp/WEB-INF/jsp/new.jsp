@@ -4,16 +4,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="${pageContext.request.contextPath}/resources/css/jquery.Jcrop.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.Jcrop.min.js"></script>
-  	<script src="${pageContext.request.contextPath}/resources/js/imgCropUpload.js"></script>
-   
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <!-- rich text-->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.slim.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap4.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/wangEditor.min.js" type="text/javascript"></script>
     <title>创作新主题 › Genesis </title>
 </head>
-
 <script>
     $(document).ready(function(){
     	function submitValidate(flag){
@@ -32,7 +30,7 @@
                 }
             }
         })
-    	
+
     });
 </script>
 <body>
@@ -52,9 +50,17 @@
                     <label for="title">主题标题</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="请输入主题标题" required="required">
                 </div>
-                <div class="form-group">
+
+<%--                <div class="form-group">
                     <label for="content">正文</label>
                     <textarea class="form-control" rows="10" id="content" name="content" required="required"></textarea>
+                </div>--%>
+
+                <div class="form-group">
+                    <label for="div1">内容</label>
+                    <div id="div1"></div>
+                    <!-- display area-->
+                    <textarea id="content" name="content" style="display: none"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -70,11 +76,21 @@
                 <br/>
                 <input type="submit" class="btn btn-primary" value="发布主题" id="replyForm">
             </form>
+            <%-- rich text --%>
+            <script type="text/javascript">
+                var E = window.wangEditor
+                var editor = new E('#div1')
+                var $text1 = $('#content')
+                editor.customConfig.onchange = function (html) {
+                    // 监控变化，同步更新到 textarea
+                    $text1.val(html)
+                }
+                editor.create()
+                // 初始化 textarea 的值
+                $text1.val(editor.txt.html())
+            </script>
         </div>
-
     </div>
-
-
 
 </div>
 
