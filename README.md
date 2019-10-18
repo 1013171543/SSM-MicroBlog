@@ -31,11 +31,11 @@
 
 ### 主页（未登录）
 
-![](/home/dong/github/microBlog/images/index.png)
+![](./images/index.png)
 
 ### 注册（ajax检测用户名是否被注册）
 
-![](/home/dong/github/microBlog/images/regist.png)
+![](./images/regist.png)
 
 ### 登录
 
