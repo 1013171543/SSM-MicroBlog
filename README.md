@@ -39,31 +39,187 @@
 
 ### 登录
 
-![](/home/dong/github/microBlog/images/login.png)
+![](./images/login.png)
 
 ### 登录后的首页
 
-![](/home/dong/github/microBlog/images/afterLogin.png)
+![](./images/afterLogin.png)
 
 ### 发帖
 
-![](/home/dong/github/microBlog/images/newTopic.png)
-
-查看我的帖子
-
-![](/home/dong/github/microBlog/images/mytopic.png)
+![](.56
 
 ### 查看个人信息
 
-![](/home/dong/github/microBlog/images/userinfo.png)
+57
+
+​
+
+58
+
+![]./images/userinfo.png)
+
+59
+
+​
+
+60
 
 ### 修改个人信息
 
-![](/home/dong/github/microBlog/images/updateInfo.png)
+61
+
+​
+
+62
+
+![](./images/updateInfo.png)
+
+63
+
+​
+
+64
 
 ### 查看帖子
 
-![](/home/dong/github/microBlog/images/details.png)
+65
+
+​
+
+66
+
+![](./images/details.png)
+
+67
+
+​
+
+68
+
+​
+
+69
+
+​
+
+70
+
+​
+
+71
+
+​
+
+72
+
+## 附aliyun 短信API地址
+
+73
+
+​
+
+74
+
+https://market.aliyun.com/products/57126001/cmapi030182.html?spm=5176.2020520132.101.7.1f7c7218FumOmR#sku=yuncode2418200001
+
+75
+
+​56
+
+### 查看个人信息
+
+57
+
+​
+
+58
+
+![]./images/userinfo.png)
+
+59
+
+​
+
+60
+
+### 修改个人信息
+
+61
+
+​
+
+62
+
+![](./images/updateInfo.png)
+
+63
+
+​
+
+64
+
+### 查看帖子
+
+65
+
+​
+
+66
+
+![](./images/details.png)
+
+67
+
+​
+
+68
+
+​
+
+69
+
+​
+
+70
+
+​
+
+71
+
+​
+
+72
+
+## 附aliyun 短信API地址
+
+73
+
+​
+
+74
+
+https://market.aliyun.com/products/57126001/cmapi030182.html?spm=5176.2020520132.101.7.1f7c7218FumOmR#sku=yuncode2418200001
+
+75
+
+​/images/newTopic.png)
+
+查看我的帖子
+
+![](./images/mytopic.png)
+
+### 查看个人信息
+
+![]./images/userinfo.png)
+
+### 修改个人信息
+
+![](./images/updateInfo.png)
+
+### 查看帖子
+
+![](./images/details.png)
 
 
 
