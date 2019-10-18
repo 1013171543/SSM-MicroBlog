@@ -45,9 +45,6 @@
 
 ![](./images/afterLogin.png)
 
-### 发帖
-
-![](.56
 
 ### 查看个人信息
 
@@ -71,62 +68,4 @@ https://market.aliyun.com/products/57126001/cmapi030182.html?spm=5176.2020520132
 
 
 
-### 查看个人信息
 
-
-![]./images/userinfo.png)
-
-
-### 修改个人信息
-
-![](./images/updateInfo.png)
-
-
-
-### 查看帖子
-
-### 查看个人信息
-
-![]./images/userinfo.png)
-
-
-### 修改个人信息
-
-
-![](./images/updateInfo.png)
-
-
-### 查看帖子
-
-
-
-![](./images/details.png)
-
-
-
-
-![](./images/newTopic.png)
-
-查看我的帖子
-
-![](./images/mytopic.png)
-
-### 查看个人信息
-
-![]./images/userinfo.png)
-
-### 修改个人信息
-
-![](./images/updateInfo.png)
-
-### 查看帖子
-
-![](./images/details.png)
-
-
-
-
-
-## 附aliyun 短信API地址
-
-https://market.aliyun.com/products/57126001/cmapi030182.html?spm=5176.2020520132.101.7.1f7c7218FumOmR#sku=yuncode2418200001
