@@ -18,7 +18,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <file.encoding>UTF-8</file.encoding>
-    <spring.version>4.2.2.RELEASE</spring.version>
+    <spring.version>5.3.18</spring.version>
     <mysql.version>5.1.29</mysql.version>
     <servlet.version>3.0-alpha-1</servlet.version>
     <aspectj.version>1.8.1</aspectj.version>
